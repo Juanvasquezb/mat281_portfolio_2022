@@ -1,0 +1,296 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usepackage{utopia} %font utopia imported
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+%------------------------------------------------------------
+%This block of code defines the information to appear in the
+%Title page
+\title[E-Commerce Sales] %optional
+{E-Commerse Sales}
+
+\subtitle{Ventas Online}
+
+\author[UTFSM] % (optional)
+{ Nicole Gomez \\ Diego Pinochet \\ Max Rosado  \\ Vicente Torrealba \\ Nicolás Valdebenito \\ Juan Vásquez}
+
+\institute[] % (optional)
+{
+Universidad Técnica Federico Santa María\\
+  Departamento de Matemáticas (DMAT)
+
+}
+
+\date[1 de Diciembre de 2022] % (optional)
+{Presentación Final}
+
+\logo{\includegraphics[height=1.0cm]{logo usm.png}}
+
+%End of title page configuration block
+%------------------------------------------------------------
+
+
+
+%------------------------------------------------------------
+%The next block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Tabla de Contenidos}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%------------------------------------------------------------
+
+
+\begin{document}
+
+%The next statement creates the title page.
+\frame{\titlepage}
+
+
+%---------------------------------------------------------
+%This block of code is for the table of contents after
+%the title page
+\begin{frame}
+\frametitle{Tabla de Contenidos}
+\tableofcontents
+\end{frame}
+%---------------------------------------------------------
+\section{¿Qué es E-Commerce?}
+\begin{frame}
+\frametitle{¿Qué es E-Commerce?}
+
+\begin{center} 
+    \includegraphics[height=5.5cm]{e commerce.png}
+\end{center}
+\end{frame}
+%---------------------------------------------------------
+
+\begin{frame}
+\frametitle{¿Qué es E-Commerce?}
+
+\begin{center} 
+    \includegraphics[height=5.5cm]{diferencias.png}
+\end{center}
+\end{frame}
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{¿Qué es E-Commerce?}
+\begin{center} 
+    \includegraphics[height=5.5cm]{ventas chile.png}
+\end{center}
+\end{frame}
+%---------------------------------------------------------
+\section{Definición del Problema}
+\begin{frame}
+\frametitle{Definición del problema}
+\begin{block}{¿Como puede ser útil la serie de datos entregada?}
+\begin{itemize}
+    \item Predecir el total de ventas por mes a futuro.
+    \item Clasificar los clientes más importantes, junto con estudiar su historial de ventas.
+    \item Relacionar las distintas variables como cantidad, precio del producto, etc, con el costo total de cada transacción o el costo total de la factura.
+\end{itemize}
+\end{block}
+\begin{center} 
+    \includegraphics[height=3.0cm]{prediccion.jpg}
+\end{center}
+
+\end{frame}
+
+%---------------------------------------------------------
+
+\begin{frame}
+\frametitle{Definición del problema}
+
+Entre las variables de cada columna podemos encontrar la siguiente información:
+\begin{itemize}
+    \item<1-> \textbf{InvoiceNo:} Número de factura (Object).
+    \item<2-> \textbf{StockCode:} Código del producto (Object).
+    \item<3-> \textbf{Description:} Nombre del producto (Object).
+    \item<4-> \textbf{Quantity:} Cantidad de productos por transacción (int64).
+    \item<5-> \textbf{InvoiceDate:} Fecha y hora cuando se generó la transacción (Object).
+    \item<6-> \textbf{UnitPrice:} Precio unitario del producto (float64).
+    \item<7-> \textbf{CustomerID:} Número de cliente (float64).
+    \item<8-> \textbf{Country:} País donde reside cada cliente (Object).
+\end{itemize}
+\end{frame}
+
+
+%---------------------------------------------------------
+\section{Estadística Descriptiva}
+\begin{frame}
+
+\frametitle{Estadística Descriptiva: Datos Nulos}
+\begin{center} 
+    \includegraphics[height=5.5cm]{datos nulos.png}
+\end{center}
+\end{frame}
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Estadística Descriptiva: ¿En qué país se realizan la mayor cantidad de ventas?}
+\begin{center} 
+    \includegraphics[height=5.5cm]{paises.png}
+\end{center}
+\end{frame}
+
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Estadística Descriptiva: ¿Cuáles son las palabras que más se repiten?}
+\begin{center} 
+    \includegraphics[height=5.5cm]{palabras.png}
+\end{center}
+\end{frame}
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Estadística Descriptiva: ¿Cuáles son los clientes que más compras realizan?}
+\begin{center} 
+    \includegraphics[height=3.3cm]{ID.png}
+\end{center}
+\end{frame}
+%---------------------------------------------------------
+\section{Preprocesamiento}
+
+\begin{frame}
+\frametitle{Preprocesamiento: Transacciones que son devoluciones}
+\begin{center} 
+    \includegraphics[height=5.5cm]{ordenes canceladas.png}
+\end{center}
+\end{frame}
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Procesamiento: Eliminar transacciones canceladas}
+\begin{center} 
+    \includegraphics[height=5.3cm]{cantidad cancelada.png}
+\end{center}
+\end{frame}
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Preprocesamiento: Detectar Outliers}
+
+\begin{center}
+    \includegraphics[height=4.3cm]{outliers.png}
+\end{center}
+\end{frame}
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Preprocesamiento: Correlación entre variables}
+
+\begin{center}
+    \includegraphics[height=6.3cm]{mapa de calor.png}
+\end{center}
+\end{frame}
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Preprocesamiento: Clasificación por percentil}
+%\begin{table}[h]
+\centering
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c| }
+\hline 
+Percentil & Quantity & UnitPrice & CustomerID & QCancel & TotalPrice \\ 
+\hline 
+5\% & 1 & 0.42 & 13075 & 0 & 1.25 \\ 
+\hline 
+95\% & 36 & 8.5 & 17954 & 0 & 59.40 \\
+\hline 
+98\% & 72 & 11.95 & 18136 & 0 & 105.60 \\
+\hline 
+99\% & 100 & 12.75 & 18223 & 1 & 179.00 \\
+\hline 
+99.99\% & 500 & 35.75 & 18283 & 9 & 825 \\
+\hline 
+
+\end{tabular}
+\caption{Tabla 1.- Clasificación por percentiles seleccionados.}
+\end{center}
+%\end{table}
+\end{frame}
+
+%---------------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Preprocesamiento: Creación de "Dummys", datos de entrenamiento}
+\begin{center}
+    \includegraphics[height=4.7cm]{matriz.png}
+\end{center}
+\end{frame}
+%---------------------------------------------------------
+\section{Modelos}
+\begin{frame}
+\frametitle{Modelos: Resultados de las métricas}
+\begin{center}
+    \includegraphics[height=6.2cm]{metricas.png}
+\end{center}
+\end{frame}
+
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Modelos: Serie de tiempo}
+\begin{center}
+    \includegraphics[height=4.5cm]{serie de tiempo.png}
+\end{center}
+% agregar gráfico
+% mostrar métricas
+% grafico con el modelo
+
+\end{frame}
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Modelos: Serie de tiempo - Gráfico de cajas}
+\begin{center}
+    \includegraphics[height=4.5cm]{grafico de cajas.png}
+\end{center}
+% agregar gráfico
+% mostrar métricas
+% grafico con el modelo
+
+\end{frame}
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Modelos: Serie de tiempo - Modelo de Sarima}
+\begin{center}
+    \includegraphics[height=4.5cm]{serie de tiempo 2.png}
+\end{center}
+% agregar gráfico
+% mostrar métricas
+% grafico con el modelo
+
+\end{frame}
+%---------------------------------------------------------
+\section{Conclusión}
+\begin{frame}
+\frametitle{Conclusión}
+
+\begin{itemize}
+    \item Según las métricas obtenidas para los modelos de regresión, Random Forest sería el que mejor se ajusta a los datos.
+    \item El modelo "Decision Tree Regressor" fue mejor que "Linear Regressor" ya que se necesitan menos supuestos (no colinealidad, distribución normal de los residuos, valores atípicos, etc), y se centra en los resultados obtenidos de las predicciones.
+    \item El modelo "Decision Tree" es muy inestable, ya que un pequeño cambio en sus datos puede cambiar drásticamente el modelo. Por otro lado, Random Forest utiliza la inestabilidad como una ventaja a través del embolsado (bagging), lo que da como resultado un modelo más estable.
+
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Conclusión}
+\begin{center}
+    \includegraphics[height=2.5cm]{descarga.png}
+\end{center}
+\begin{itemize}
+    \item Al utilizar el modelo de Sarima para estudiar la serie temporal, pareciera que el modelo no se ajusta bien en comparación a los meses de octubre a diciembre, pero si tiene un buen comportamiento en comparación a los meses anteriores.
+    \item Se lograría un mejor resultado al predecir el total de ventas si se estudiara una mayor cantidad de años, ya que existen meses donde la demanda es muy superior.
+\end{itemize}
+\end{frame}
+
+
+
+
+%---------------------------------------------------------
+\end{document}
